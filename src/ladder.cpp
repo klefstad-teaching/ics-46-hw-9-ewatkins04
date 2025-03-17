@@ -36,9 +36,9 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
                 cost = 1;
             }
 
-            dist[k][l] = min(dist[k - 1][l] + 1, min(dist[k][l - 1] + 1, dist[k - 1][l - 1] + cost));
-
+            dist[k][l] = min({dist[k - 1][l] + 1,dist[k][l - 1] + 1, dist[k - 1][l - 1] + cost});
         }
+
     }
 
     return dist[lenOne][lenTwo] <= d;
@@ -113,8 +113,16 @@ void print_word_ladder(const vector<string>& ladder) {
     for (auto s : ladder) {
         cout << s << " ";
     }
+    cout << endl;
 }
 
 void verify_word_ladder() {
+
+    set<string> words;
+    load_words(words, "src/words.txt");
+    auto result = generate_word_ladder("code", "data", words);
+    bool check = result.size() == 6;
+    cout << check << endl;
+
     
 }
