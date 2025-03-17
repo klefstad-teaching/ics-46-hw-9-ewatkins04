@@ -7,11 +7,16 @@ int main() {
     file_to_graph("src/small.txt", graph);
 
     vector<int> prev;
-    auto d = dijkstra_shortest_path(graph, 0, prev);
+    auto dist = dijkstra_shortest_path(graph, 0, prev);
 
-    extract_shortest_path(d, prev, 1);
+    auto path = extract_shortest_path(dist, prev, 2);
 
-    print_path(d, 0);
+    int total = 0;
+    for (auto n : dist) {
+        total += n;
+    }
+
+    print_path(path, total);
 
 
 
